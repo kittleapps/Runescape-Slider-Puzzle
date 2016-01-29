@@ -1,9 +1,0 @@
-File Size: 245x245 Portable Network Graphics Image (.png)
-File Name: PIC.png
-File Directory: img_src
-Alpha Channmel Enabled: No/Disabled (Causes issues on the buttons if you leave transparent Segments)
-Other Limits/Personal Preferences: 3
-
-> The Bottom-Right Corner's Segment will NOT be used.
-> Segments will be in 45x45 Squares.
-> Segments that are exactly the same (e.g. Pure Solid-Color empty spaces), should be avoided
