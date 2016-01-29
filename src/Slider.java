@@ -47,7 +47,7 @@ public class Slider extends JFrame implements ActionListener {
 	public static String[] LET = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z".split(" "); // Used in the Temporary pictures
 	public final static int INTERVAL = 550; // Used in timer for Tile Refreshes. (this is just over 1/2 a second)
 	public static int Offset = 56; // used for C2 Coordinate's tile offsets. changing this will shift all equally in a square.
-	public static boolean RANDOMIZED = false; // Do I Wish to Randomize? (true for Randomize, false for image previewing/Demo)
+	public static boolean RANDOMIZED = true; // Do I Wish to Randomize? (true for Randomize, false for image previewing/Demo)
 	
 	public static int[][] C2 = { 
 			{ 115 + Offset * 0, 39 + Offset * 0 },
