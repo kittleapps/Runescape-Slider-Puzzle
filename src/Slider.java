@@ -7,8 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Arrays;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -47,7 +45,7 @@ public class Slider extends JFrame implements ActionListener {
 	public static String[] LET = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z".split(" "); // Used in the Temporary pictures
 	public final static int INTERVAL = 550; // Used in timer for Tile Refreshes. (this is just over 1/2 a second)
 	public static int Offset = 56; // used for C2 Coordinate's tile offsets. changing this will shift all equally in a square.
-	public static boolean RANDOMIZED = true; // Do I Wish to Randomize? (true for Randomize, false for image previewing/Demo)
+	public static boolean RANDOMIZED = false; // Do I Wish to Randomize? (true for Randomize, false for image previewing/Demo)
 	
 	public static int[][] C2 = { 
 			{ 115 + Offset * 0, 39 + Offset * 0 },
@@ -155,18 +153,11 @@ public class Slider extends JFrame implements ActionListener {
 					}
 				}
 
-				for (int i = 0; i < chunks; i++) {
-					ImageIO.write(imgs[i], "png", new File(Slider.TEMP_DIR + "/img_" + Slider.LET[i] + ".png"));
-				}
-
 				System.out.println("Sudo Bash: NootNoot!"); // All Worship the Mighty Pingu!
 				System.out.println("Sudo Bash has Recieved an Image Drop!"); // My Prayers have been Answered!
 				System.out.println("Sudo Bash: Brilliant!"); // ShaunyPwnsAll
 				System.out.println("You Receive "+chunks+" Image Shard(s)."); // Oh.. You had Lootshare Enabled... ok then... thats o...k... =S
 
-				String[] dirListing = null;
-				dirListing = Slider.TEMP_DIR.list();
-				Arrays.sort(dirListing);
 				Randomizer myRandom = new Randomizer(chunks-1);
 				for (int j = 0; j < (chunks-1); ++j){
 					if (RANDOMIZED){
@@ -211,7 +202,7 @@ public class Slider extends JFrame implements ActionListener {
 						Slider.listOfBtn[i].setName("" + i);  //Set a Button Name to it's REAL id.
 						Slider.listOfBtn[i].setBorderPainted(false); // No borders = Better looking Image tile. 
 						Slider.listOfBtn[i].setOpaque(true); // No transparencies here.
-						Slider.listOfBtn[i].setBackground(new Color(88, 73, 56)); // Fail safe color just in case image doesn't load.
+						Slider.listOfBtn[i].setBackground(new Color(88, 73, 56)); // Fail safe color just in case image doesn't load/Transparencies in the photo.
 						Slider.listOfBtn[i].setBounds(Slider.C2[Integer.parseInt(Slider.position[i][4])][0], Slider.C2[Integer.parseInt(Slider.position[i][4])][1], 49, 49); // set it's position.
 						Slider.position[i][0] = "" + Slider.listOfBtn[i].getX(); //Data Gathering+Setting.
 						Slider.position[i][1] = "" + Slider.listOfBtn[i].getY(); //Data Gathering+Setting.

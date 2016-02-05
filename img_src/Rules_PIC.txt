@@ -1,7 +1,7 @@
 File Size: 245x245 Portable Network Graphics Image (.png)
 File Name: PIC.png
 File Directory: img_src
-Alpha Channmel Enabled: No/Disabled (Causes issues on the buttons if you leave transparent Segments)
+Alpha Channel Enabled: Yes/Enabled* (*Allows Transparent Backbrounds, but is NOT required)
 Other Limits/Personal Preferences: 3
 
 > The Bottom-Right Corner's Segment will NOT be used.

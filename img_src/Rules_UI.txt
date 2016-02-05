@@ -1,7 +1,7 @@
 File Size: 517x349 Portable Network Graphics Image (.png)
 File Name: UI.png
 File Directory: img_src
-Alpha Channmel Enabled: Yes/Enabled* (*Allows Transparent Backbrounds, but is NOT required)
+Alpha Channel Enabled: Yes/Enabled* (*Allows Transparent Backbrounds, but is NOT required)
 Other Limits/Personal Preferences: 4
 
 > Use the Supplied UI_Template Document (I Used G.i.m.p.) for UI Editing.
