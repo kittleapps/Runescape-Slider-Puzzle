@@ -20,12 +20,12 @@ public class Slider extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 3820807912519753989L;
 
-	public static final int rows = 5; //Standard RuneScape Slider Puzzle Size.
-	public static final int cols = 5; //Standard RuneScape Slider Puzzle Size.
-	public static final int chunks = rows * cols; //Standard RuneScape Slider Puzzle Size.
+	public static final int rows = 5;
+	public static final int cols = 5;
+	public static final int chunks = rows * cols;
 
-	public static String[][] position; // Initialized Later.
-	/* position Data storage Usages:
+	public static String[][] position;
+	/* position's Data storage Usages:
 	 *
 	 * [#][0] = Exact Button X Position
 	 * [#][1] = Exact Button Y Position
@@ -35,17 +35,17 @@ public class Slider extends JFrame implements ActionListener {
 	 * [#][5] = Current/Temporary Button Position ID.
 	 * 
 	 */
-	private static JPanel Tiles; // Panel overlay (above the UI)
-	public static Timer timer; // Auto-Refresh Timer.
-	private static JButton[] listOfBtn = new JButton[chunks]; // Buttons used for the photos
+	private static JPanel Tiles;
+	public static Timer timer;
+	private static JButton[] listOfBtn = new JButton[chunks];
 
-	public static String PATH = Paths.get(".").toAbsolutePath().normalize().toString() + "/img_src/"; // Picture Source DIR
-	public static File TEMP_DIR = new File(Slider.PATH + ".TEMP_DIR/"); // Temporary DIR for split images.
+	public static String PATH = Paths.get(".").toAbsolutePath().normalize().toString() + "/img_src/";
+	public static File TEMP_DIR = new File(Slider.PATH + ".TEMP_DIR/");
 
-	public static String[] LET = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z".split(" "); // Used in the Temporary pictures
-	public final static int INTERVAL = 550; // Used in timer for Tile Refreshes. (this is just over 1/2 a second)
-	public static int Offset = 56; // used for C2 Coordinate's tile offsets. changing this will shift all equally in a square.
-	public static boolean RANDOMIZED = true; // Do I Wish to Randomize? (true for Randomize, false for image previewing/Demo)
+	public static String[] LET = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z".split(" ");
+	public final static int INTERVAL = 550;
+	public static int Offset = 56;
+	public static boolean RANDOMIZED = true;
 	
 	public static int[][] C2 = { 
 			{ 115 + Offset * 0, 39 + Offset * 0 },
@@ -73,12 +73,12 @@ public class Slider extends JFrame implements ActionListener {
 			{ 115 + Offset * 2, 39 + Offset * 4 },
 			{ 115 + Offset * 3, 39 + Offset * 4 }, 
 			{ 115 + Offset * 4, 39 + Offset * 4 },
-	}; // Button Positions to match the default UI.png using offset multipliers.
+	};
 
-	public static int TILED = 1; // USed in Tile Movements for Swapping Tiles
-	public static int lastButtonID = (chunks-1); // Default last button to the id on the list's end.
-	public static String temp_1, temp_2, temp_3, temp_4, temp_5, temp_6, temp_7, temp_8, temp_9; // USed in Tile Movements for Swapping Tiles
-	public JButton exit, hint; // Self Explanatory. Hint+Exit buttons.
+	public static int TILED = 1;
+	public static int lastButtonID = (chunks-1);
+	public static String temp_1, temp_2, temp_3, temp_4, temp_5, temp_6, temp_7, temp_8, temp_9;
+	public JButton exit, hint;
 
 	public Slider(String Title, String Source, String UI) throws IOException {
 		final File fileToRead = new File(UI);
@@ -123,7 +123,7 @@ public class Slider extends JFrame implements ActionListener {
 					UI_img.setBounds(0, 0, getWidth(), getHeight());
 				} catch (final IOException e1) {
 					e1.printStackTrace();
-					System.out.println("ERROR! ERROR! I Blame Mod Boko! #BlameBoko"); // ALWAYS #BlameBoko
+					System.out.println("ERROR! ERROR! I Blame Mod Boko! #BlameBoko");
 					System.exit(0);
 				}
 
@@ -134,7 +134,6 @@ public class Slider extends JFrame implements ActionListener {
 					image = ImageIO.read(ImagePath);
 				} catch (final IOException e) {
 					System.out.println("The File: "+ImagePath.getAbsolutePath()+" Triggered an error.");
-					System.out.println("ERROR! ERROR! I Blame Mod Boko! #BlameBoko"); // ALWAYS #BlameBoko
 					System.exit(0);
 				}
 
@@ -153,10 +152,10 @@ public class Slider extends JFrame implements ActionListener {
 					}
 				}
 
-				System.out.println("Sudo Bash: NootNoot!"); // All Worship the Mighty Pingu!
-				System.out.println("Sudo Bash has Recieved an Image Drop!"); // My Prayers have been Answered!
-				System.out.println("Sudo Bash: Brilliant!"); // ShaunyPwnsAll
-				System.out.println("You Receive "+chunks+" Image Shard(s)."); // Oh.. You had Lootshare Enabled... ok then... thats o...k... =S
+				System.out.println("Sudo Bash: NootNoot!");
+				System.out.println("Sudo Bash has Recieved an Image Drop!");
+				System.out.println("Sudo Bash: Brilliant!");
+				System.out.println("You Receive "+chunks+" Image Shard(s).");
 
 				Randomizer myRandom = new Randomizer(chunks-1);
 				for (int j = 0; j < (chunks-1); ++j){
@@ -173,43 +172,43 @@ public class Slider extends JFrame implements ActionListener {
 				for (int i = 0; i < chunks; i++) {
 					int val = i;
 					if (i == (chunks-1)) {
-						Slider.listOfBtn[chunks-1] = new JButton(); //Initialize the button
-						Slider.listOfBtn[chunks-1].setName(""+(chunks-1)); //Set a Button Name to it's REAL id.
-						Slider.listOfBtn[chunks-1].setOpaque(true); // Used in making the empty tile appear better.
-						Slider.listOfBtn[chunks-1].setContentAreaFilled(true); // a fail safe to make sure the empty tile properly shows, not required.
-						Slider.listOfBtn[chunks-1].setBorderPainted(false); // No borders = Better looking empty tile.
-						Slider.listOfBtn[chunks-1].setEnabled(false); // no need to click this. disable it.
-						Slider.listOfBtn[chunks-1].setBackground(new Color(30,30,30,255)); // Custom color to blend easier.
-						Slider.listOfBtn[chunks-1].setBounds(Slider.C2[chunks-1][0], Slider.C2[chunks-1][1], 49, 49); // set it's position.
-						Slider.position[chunks-1][0] = "" + Slider.listOfBtn[chunks-1].getX(); //Data Gathering+Setting.
-						Slider.position[chunks-1][1] = "" + Slider.listOfBtn[chunks-1].getY(); //Data Gathering+Setting.
-						Slider.position[chunks-1][2] = "" + Slider.listOfBtn[chunks-1].getWidth(); //Data Gathering+Setting.
-						Slider.position[chunks-1][3] = "" + Slider.listOfBtn[chunks-1].getHeight(); //Data Gathering+Setting.
-						Slider.position[chunks-1][4] = "" + (chunks-1); //Data Gathering+Setting.
-						Slider.position[chunks-1][5] = "" + (chunks-1); //Data Gathering+Setting.
-						Slider.Tiles.add(Slider.listOfBtn[chunks-1]); // Add the tile.
+						Slider.listOfBtn[chunks-1] = new JButton();
+						Slider.listOfBtn[chunks-1].setName(""+(chunks-1));
+						Slider.listOfBtn[chunks-1].setOpaque(true);
+						Slider.listOfBtn[chunks-1].setContentAreaFilled(true);
+						Slider.listOfBtn[chunks-1].setBorderPainted(false);
+						Slider.listOfBtn[chunks-1].setEnabled(false);
+						Slider.listOfBtn[chunks-1].setBackground(new Color(30,30,30,255));
+						Slider.listOfBtn[chunks-1].setBounds(Slider.C2[chunks-1][0], Slider.C2[chunks-1][1], 49, 49);
+						Slider.position[chunks-1][0] = "" + Slider.listOfBtn[chunks-1].getX();
+						Slider.position[chunks-1][1] = "" + Slider.listOfBtn[chunks-1].getY();
+						Slider.position[chunks-1][2] = "" + Slider.listOfBtn[chunks-1].getWidth();
+						Slider.position[chunks-1][3] = "" + Slider.listOfBtn[chunks-1].getHeight();
+						Slider.position[chunks-1][4] = "" + (chunks-1);
+						Slider.position[chunks-1][5] = "" + (chunks-1);
+						Slider.Tiles.add(Slider.listOfBtn[chunks-1]);
 					} else {
-						Slider.listOfBtn[i] = new JButton(); //Initialize the button 
-						Slider.listOfBtn[i].addActionListener(new ActionListener() // Setup it's Actions.
+						Slider.listOfBtn[i] = new JButton();
+						Slider.listOfBtn[i].addActionListener(new ActionListener()
 						{
 							@Override
 							public void actionPerformed(ActionEvent e)
 							{
-								Slider.CheckMove(Slider.listOfBtn[val], e); // Check if the new position is a finished board.
+								Slider.CheckMove(Slider.listOfBtn[val], e);
 							}
 						});
-						Slider.listOfBtn[i].setIcon(new ImageIcon(imgs[i])); // Set the image chunk.
-						Slider.listOfBtn[i].setName("" + i);  //Set a Button Name to it's REAL id.
-						Slider.listOfBtn[i].setBorderPainted(false); // No borders = Better looking Image tile. 
-						Slider.listOfBtn[i].setOpaque(true); // No transparencies here.
-						Slider.listOfBtn[i].setBackground(new Color(88, 73, 56)); // Fail safe color just in case image doesn't load/Transparencies in the photo.
-						Slider.listOfBtn[i].setBounds(Slider.C2[Integer.parseInt(Slider.position[i][4])][0], Slider.C2[Integer.parseInt(Slider.position[i][4])][1], 49, 49); // set it's position.
-						Slider.position[i][0] = "" + Slider.listOfBtn[i].getX(); //Data Gathering+Setting.
-						Slider.position[i][1] = "" + Slider.listOfBtn[i].getY(); //Data Gathering+Setting.
-						Slider.position[i][2] = "" + Slider.listOfBtn[i].getWidth(); //Data Gathering+Setting.
-						Slider.position[i][3] = "" + Slider.listOfBtn[i].getHeight(); //Data Gathering+Setting.
-						Slider.listOfBtn[i].setVisible(true); // Show me the tiles!
-						Slider.Tiles.add(Slider.listOfBtn[i]); // Add 'em up!
+						Slider.listOfBtn[i].setIcon(new ImageIcon(imgs[i]));
+						Slider.listOfBtn[i].setName("" + i);
+						Slider.listOfBtn[i].setBorderPainted(false);
+						Slider.listOfBtn[i].setOpaque(true);
+						Slider.listOfBtn[i].setBackground(new Color(88, 73, 56));
+						Slider.listOfBtn[i].setBounds(Slider.C2[Integer.parseInt(Slider.position[i][4])][0], Slider.C2[Integer.parseInt(Slider.position[i][4])][1], 49, 49);
+						Slider.position[i][0] = "" + Slider.listOfBtn[i].getX();
+						Slider.position[i][1] = "" + Slider.listOfBtn[i].getY();
+						Slider.position[i][2] = "" + Slider.listOfBtn[i].getWidth();
+						Slider.position[i][3] = "" + Slider.listOfBtn[i].getHeight();
+						Slider.listOfBtn[i].setVisible(true);
+						Slider.Tiles.add(Slider.listOfBtn[i]);
 					}
 				}
 				validate();
@@ -217,11 +216,11 @@ public class Slider extends JFrame implements ActionListener {
 				setResizable(false);
 				setBackground(Color.BLACK);
 				Slider.Tiles.setBackground(Color.BLACK);
-				setLocationRelativeTo(null); // Center the window to your screen.
+				setLocationRelativeTo(null);
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 				setVisible(true);
-				Slider.timer.start(); // Start automatic refreshes.
-				System.out.println("You Combine the Image Shards into a Clue Puzzle."); // Did u like my Drop? i did! 
+				Slider.timer.start();
+				System.out.println("You Combine the Image Shards into a Clue Puzzle.");
 				hint.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
@@ -260,7 +259,7 @@ public class Slider extends JFrame implements ActionListener {
 				});
 
 
-			} // end ImagePath Finding
+			}
 			else{
 				System.out.println("The File: "+ImagePath.getAbsolutePath()+" Was Not Found.");
 				JOptionPane.showMessageDialog(null,
@@ -269,7 +268,7 @@ public class Slider extends JFrame implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 				System.exit(0);
 			}
-		} // end fileToRead Finding
+		}
 		else{
 			System.out.println("The File: "+fileToRead.getAbsolutePath()+" Was Not Found.");
 			JOptionPane.showMessageDialog(null,
@@ -278,7 +277,7 @@ public class Slider extends JFrame implements ActionListener {
 					JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
-	} // end public Slider
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {}
@@ -313,23 +312,23 @@ public class Slider extends JFrame implements ActionListener {
 			Slider.TILED = 1;
 			TILESA = 0;
 		}
-		Slider.temp_5 = Slider.position[Missing_TILE][0]; // Copy original data
-		Slider.temp_6 = Slider.position[Missing_TILE][1]; // Copy original data
-		Slider.temp_7 = Slider.position[Missing_TILE][2]; // Copy original data
-		Slider.temp_8 = Slider.position[Missing_TILE][3]; // Copy original data
-		Slider.temp_9 = Slider.position[Missing_TILE][5]; // Copy original data
+		Slider.temp_5 = Slider.position[Missing_TILE][0];
+		Slider.temp_6 = Slider.position[Missing_TILE][1];
+		Slider.temp_7 = Slider.position[Missing_TILE][2];
+		Slider.temp_8 = Slider.position[Missing_TILE][3];
+		Slider.temp_9 = Slider.position[Missing_TILE][5];
 
-		Slider.position[Missing_TILE][0] = Slider.position[BUTTONID][0]; // Old Tiles are the new Tiles now in FashionScape.
-		Slider.position[Missing_TILE][1] = Slider.position[BUTTONID][1]; // Old Tiles are the new Tiles now in FashionScape.
-		Slider.position[Missing_TILE][2] = Slider.position[BUTTONID][2]; // Old Tiles are the new Tiles now in FashionScape.
-		Slider.position[Missing_TILE][3] = Slider.position[BUTTONID][3]; // Old Tiles are the new Tiles now in FashionScape.
-		Slider.position[Missing_TILE][5] = Slider.position[BUTTONID][5]; // Old Tiles are the new Tiles now in FashionScape.
-		Slider.position[BUTTONID][0] = Slider.temp_5; // Give those New Tiles something to look forward to, Give 'em your old Outfit.
-		Slider.position[BUTTONID][1] = Slider.temp_6; // Give those New Tiles something to look forward to, Give 'em your old Outfit.
-		Slider.position[BUTTONID][2] = Slider.temp_7; // Give those New Tiles something to look forward to, Give 'em your old Outfit.
-		Slider.position[BUTTONID][3] = Slider.temp_8; // Give those New Tiles something to look forward to, Give 'em your old Outfit.
-		Slider.position[BUTTONID][5] = Slider.temp_9; // Give those New Tiles something to look forward to, Give 'em your old Outfit.
-		Slider.lastButtonID = Missing_TILE; // Guess Who's OutDated! You Are! Yes You Are! Yes You Are! 
+		Slider.position[Missing_TILE][0] = Slider.position[BUTTONID][0];
+		Slider.position[Missing_TILE][1] = Slider.position[BUTTONID][1];
+		Slider.position[Missing_TILE][2] = Slider.position[BUTTONID][2];
+		Slider.position[Missing_TILE][3] = Slider.position[BUTTONID][3];
+		Slider.position[Missing_TILE][5] = Slider.position[BUTTONID][5];
+		Slider.position[BUTTONID][0] = Slider.temp_5;
+		Slider.position[BUTTONID][1] = Slider.temp_6;
+		Slider.position[BUTTONID][2] = Slider.temp_7;
+		Slider.position[BUTTONID][3] = Slider.temp_8;
+		Slider.position[BUTTONID][5] = Slider.temp_9;
+		Slider.lastButtonID = Missing_TILE;
 		if (CheckResults()){
 			System.out.println("You Completed a Treasure Trail!");
 			JOptionPane.showMessageDialog(null,
@@ -337,7 +336,7 @@ public class Slider extends JFrame implements ActionListener {
 					"Sudo Bash Says...",
 					JOptionPane.PLAIN_MESSAGE);
 			for (int i = 0; i < chunks; i++){
-				Slider.listOfBtn[i].setEnabled(false); // You Won your prize, don't even think of re-rolling. ;)
+				Slider.listOfBtn[i].setEnabled(false);
 			}
 		}
 	}
@@ -397,15 +396,14 @@ public class Slider extends JFrame implements ActionListener {
 	public static void main(String[] args) {
 		final String PATH = Paths.get(".").toAbsolutePath().normalize().toString() + "/img_src/";
 		try {
-			System.out.println("Welcome to Runescape!"); // This isn't RuneScape? WTF Jagex! (oh wait.. i'm not a J-Mod..) NVM! =S
-			new Slider("puzzle", PATH + "PIC.png", PATH + "UI.png"); // Shall we Get Started? i can't BankStand all day! (well i can.. but i wont!)
+			System.out.println("Welcome to Runescape!");
+			new Slider("puzzle", PATH + "PIC.png", PATH + "UI.png");
 
 		} catch (final IOException e) {
-			e.printStackTrace(); // #BlameBoko
-			System.out.println("ERROR! ERROR! I Blame Mod Boko! #BlameBoko"); // ALWAYS #BlameBoko
+			e.printStackTrace();
 			System.exit(0);
 		}
 	}
 
 
-} // end class Slider
+}
